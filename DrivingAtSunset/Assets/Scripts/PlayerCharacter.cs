@@ -7,9 +7,11 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] Rigidbody _rb;
     [SerializeField] Transform _transformPlayer;
 
+    [SerializeField] private float _speed = 31.0f;
+
     private void Start()
     {       
-        _rb.velocity = new Vector3(0, 0, 31.0f);
+        _rb.velocity = new Vector3(0, 0, _speed);
     }
 
     void Update()

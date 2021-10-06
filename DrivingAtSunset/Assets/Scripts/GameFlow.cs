@@ -46,7 +46,7 @@ public class GameFlow : MonoBehaviour
   
         nextTileSpawn.z += 63;
 
-        if (RoadList.Count > 30)
+        if (RoadList.Count > 25)
         {
             RoadList.RemoveAt(1);
             Destroy(transform.GetChild(1).gameObject);
