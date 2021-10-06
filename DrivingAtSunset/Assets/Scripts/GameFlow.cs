@@ -30,7 +30,7 @@ public class GameFlow : MonoBehaviour
         RoadList.Add(_tileObj6);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Debug.Log("List size: " + RoadList.Count);
     }
