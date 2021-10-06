@@ -21,7 +21,7 @@ public class PlayerCharacter : MonoBehaviour
         //if (transform.position.x < -7)
         //    transform.position = new Vector3(-7, transform.position.y, transform.position.z);
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             Debug.Log("A pressed");
 
@@ -29,7 +29,7 @@ public class PlayerCharacter : MonoBehaviour
         }
        
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             Debug.Log("D pressed");
            
