@@ -39,17 +39,19 @@ public class GameFlow : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
+        nextTileSpawn.z = 63f + RoadList[RoadList.Count -1].position.z;
        var road = Instantiate(_tileObj, nextTileSpawn, _tileObj.rotation);
 
         road.transform.parent = GameObject.Find("RoadGroup").transform;
         RoadList.Add(road);
-  
-        nextTileSpawn.z += 63;
+
+        //nextTileSpawn.z += 63;
 
         if (RoadList.Count > 25)
         {
             RoadList.RemoveAt(1);
-            Destroy(transform.GetChild(1).gameObject);
+            //Destroy(transform.GetChild(1).gameObject);
+            Destroy(transform.GetChild(2).gameObject);
         }
         
         StartCoroutine(spawnTile());
