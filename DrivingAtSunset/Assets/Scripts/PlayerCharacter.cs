@@ -28,14 +28,14 @@ public class PlayerCharacter : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
   
-            _transformPlayer.Translate(-0.1f, 0, 0);
+            _transformPlayer.Translate(-0.1f, 0.0f, 0.0f);
         }
        
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
      
-            _transformPlayer.Translate(0.1f, 0, 0.0f);
+            _transformPlayer.Translate(0.1f, 0.0f, 0.0f);
         }
     }
 
