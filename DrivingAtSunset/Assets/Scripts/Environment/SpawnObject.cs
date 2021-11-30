@@ -15,8 +15,6 @@ public class SpawnObject : MonoBehaviour
 	
 	void Update()
 	{
-		
-
 		if (ToSpawn == true)
 		{
 			Location = Positions[Random.Range(0, Positions.Length)];
