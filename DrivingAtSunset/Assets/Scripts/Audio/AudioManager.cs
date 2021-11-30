@@ -43,6 +43,8 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string name)
     {
+        //Add music to any part of code with this command:
+        //FindObjectOfType<AudioManager>().Play("*TrackName");
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         if (s == null)
