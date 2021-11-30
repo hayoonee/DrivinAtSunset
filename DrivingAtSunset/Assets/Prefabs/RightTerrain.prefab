@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7965388638014609049
+--- !u!1 &1375943888335494874
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7965388638014609046}
-  - component: {fileID: 7965388638014609045}
-  - component: {fileID: 7965388638014609044}
-  - component: {fileID: 7965388638014609047}
+  - component: {fileID: 1375943888335494875}
+  - component: {fileID: 1375943888335494878}
+  - component: {fileID: 1375943888335494877}
+  - component: {fileID: 1375943888335494876}
   m_Layer: 0
-  m_Name: Left
+  m_Name: RightTerrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7965388638014609046
+--- !u!4 &1375943888335494875
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7965388638014609049}
+  m_GameObject: {fileID: 1375943888335494874}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.7, y: 0, z: 0}
+  m_LocalPosition: {x: 136.8, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7965388638014609045
+--- !u!114 &1375943888335494878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7965388638014609049}
+  m_GameObject: {fileID: 1375943888335494874}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b7c86bbdd9755a43bd20197206e9599, type: 3}
@@ -47,13 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xSize: 150
   zSize: 400
---- !u!23 &7965388638014609044
+--- !u!23 &1375943888335494877
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7965388638014609049}
+  m_GameObject: {fileID: 1375943888335494874}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -88,11 +88,11 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &7965388638014609047
+--- !u!33 &1375943888335494876
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7965388638014609049}
+  m_GameObject: {fileID: 1375943888335494874}
   m_Mesh: {fileID: 0}
