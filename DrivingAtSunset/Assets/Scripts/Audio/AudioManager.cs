@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 
-
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
+
 
     public static AudioManager instance;
 
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            Debug.Log("duplicate Audiomanager");
             return;
         }
 
@@ -32,7 +34,8 @@ public class AudioManager : MonoBehaviour
 
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
+            if(s.source == null)
+            s.source = gameObject.GetComponent<AudioSource>();
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;

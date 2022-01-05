@@ -7,21 +7,36 @@ public class SpawnObject : MonoBehaviour
 	public Transform[] Positions;
 	public Transform Parent;
 	public GameObject Object;
+	[SerializeField] AudioSource audioSource;
 
 	public Transform Location;
 
 	bool ToSpawn = true;
 
-	
-	void Update()
+    void Start()
+    {
+		Debug.Log(audioSource);
+		if(audioSource == null)
+        {
+			audioSource = GameObject.FindObjectOfType<AudioSource>();
+
+			if (audioSource == null)
+			{
+				Debug.Log("Audiosource not found");
+			}
+        }
+	}
+
+    void Update()
 	{
 		if (ToSpawn == true)
 		{
 			Location = Positions[Random.Range(0, Positions.Length)];
-			Instantiate(Object,Location.position, Quaternion.identity, this.Parent);
+			Collectables collect = Instantiate(Object,Location.position, Quaternion.identity, this.Parent).GetComponent<Collectables>();
+			collect?.AssignedAudioSource(audioSource);
 			ToSpawn = false;
 			StartCoroutine(ToSpawnTrue());
-		}
+		}	
 	}
 
 	IEnumerator ToSpawnTrue()

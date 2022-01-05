@@ -4,14 +4,11 @@ using System.Collections;
 
 public class Collectables : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+   private AudioSource audioSource;
 
     public string collectType;
 
-    private void Start()
-    {
-        
-    }
+   
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +16,13 @@ public class Collectables : MonoBehaviour
         {
             audioSource.pitch += Time.deltaTime * 1.5f;
         }
+            Debug.Log(other.gameObject.tag+"_"+other.gameObject.name);
+    }
+
+    public void AssignedAudioSource(AudioSource audio)
+    {
+        audioSource = audio;
+        
     }
 
     
