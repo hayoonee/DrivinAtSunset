@@ -28,18 +28,19 @@ public class Collectables: MonoBehaviour
             {
                 case CollectType.up:
                     {
-                        changePitch = 0.1f;                     
+                        changePitch = 0.1f;//need to clamp this number
                     }
                     break;
 
                 case CollectType.down:
                     {
-                        changePitch = -0.2f;
+                        changePitch = -0.2f;//need to clamp this number
                     }
                     break;
             }
 
             audioSource.pitch += changePitch;
+            Debug.LogWarning("Pitch at: " + audioSource.pitch);
         }
 
             Debug.Log(other.gameObject.tag+"_"+other.gameObject.name);

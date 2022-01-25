@@ -25,14 +25,11 @@ public class PlayerCharacter : MonoBehaviour
   
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-  
             _transformPlayer.Translate(-0.1f, 0.0f, 0.0f);
         }
-       
-
+      
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-     
             _transformPlayer.Translate(0.1f, 0.0f, 0.0f);
         }
     }
@@ -42,13 +39,11 @@ public class PlayerCharacter : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             CollectCoin?.Invoke();
-            Debug.LogWarning("Invoked Coin");
+          
         }
         if (other.gameObject.CompareTag("Tree"))
         {
             CollectTree?.Invoke();
-            Debug.LogWarning("Invoked Tree");
-
         }
 
         if ((other.gameObject.CompareTag("Coin")) || (other.gameObject.CompareTag("Tree")))

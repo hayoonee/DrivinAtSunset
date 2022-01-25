@@ -10,7 +10,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    AudioSource audio;
+   // AudioSource audio;
     public static AudioManager instance;
 
     private void Start()
@@ -46,7 +46,6 @@ public class AudioManager : MonoBehaviour
     }
 
     public void Update()
-
     {// if(!audio.isPlaying)
     //    {
 
