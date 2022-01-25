@@ -30,10 +30,6 @@ public class GameFlow : MonoBehaviour
         RoadList.Add(_tileObj6);
     }
 
-    void FixedUpdate()
-    {
-        Debug.Log("List size: " + RoadList.Count);
-    }
 
     IEnumerator spawnTile()
     {
@@ -51,7 +47,7 @@ public class GameFlow : MonoBehaviour
         {
             RoadList.RemoveAt(1);
             //Destroy(transform.GetChild(1).gameObject);
-            Destroy(transform.GetChild(2).gameObject);
+            Destroy(transform.GetChild(1).gameObject);
         }
         
         StartCoroutine(spawnTile());

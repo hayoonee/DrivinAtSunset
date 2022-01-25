@@ -18,8 +18,7 @@ public class Collectables: MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other)
-    {
-       
+    {  
         if (other.gameObject.CompareTag("Player"))
         {
             float changePitch = 0;

@@ -11,7 +11,7 @@ public class PlayerCharacter : MonoBehaviour
     public List<string> collects;
 
     public event System.Action CollectCoin;
-    public event System.Action CollectTree;
+    public event System.Action CollectObstacle;
 
 
     private void Start()
@@ -25,12 +25,12 @@ public class PlayerCharacter : MonoBehaviour
   
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            _transformPlayer.Translate(-0.1f, 0.0f, 0.0f);
+            _transformPlayer.Translate(-0.15f, 0.0f, 0.0f);
         }
       
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            _transformPlayer.Translate(0.1f, 0.0f, 0.0f);
+            _transformPlayer.Translate(0.15f, 0.0f, 0.0f);
         }
     }
 
@@ -43,7 +43,7 @@ public class PlayerCharacter : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Tree"))
         {
-            CollectTree?.Invoke();
+            CollectObstacle?.Invoke();
         }
 
         if ((other.gameObject.CompareTag("Coin")) || (other.gameObject.CompareTag("Tree")))

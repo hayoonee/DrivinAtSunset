@@ -11,37 +11,36 @@ public class MeshGenerator : MonoBehaviour
     Vector3[] vertices;
     int[] triangles;
 
-    public int xSize = 20;
-    public int zSize = 20;
+    //private int xSize = 100;
+    //private int zSize = 400; 
+    private int xSize = 200;
+    private int zSize = 800;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         _mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = _mesh;
 
-       CreateShape();
-       UpdateMesh();
+        CreateShape();
+        InvokeRepeating("UpdateMesh", 0.0f, 0.1f);
     }
 
-    private void Update()
-    {
-       //CreateShape();
-    }
 
     private void CreateShape()
     {
         vertices = new Vector3[(xSize + 1) *(zSize +1)];
-        float randVal = Random.Range(0.1f, 0.3f);
-        //Debug.Log("Random Value is: " + randVal);
+
+        float randVal = Random.Range(1f, 2f);
+       
         //left to right
         for (int i = 0, z = 0; z <= zSize ; z++)
         {
             for (int x = 0; x <= xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * randVal, z * randVal) * 2.0f;
+                float y = Mathf.PerlinNoise(x / 2.0f * randVal, z / 2.0f * randVal);
                 vertices[i] = new Vector3(x, y, z);
+              
+
                 i++;
             }
         }
@@ -72,10 +71,10 @@ public class MeshGenerator : MonoBehaviour
 
     private void UpdateMesh()
     {
-        _mesh.Clear();
         _mesh.vertices = vertices;
         _mesh.triangles = triangles;
 
         _mesh.RecalculateNormals();
+        CreateShape();
     }
 }

@@ -14,7 +14,9 @@ public class SpawnObject : MonoBehaviour
 
 	bool ToSpawn = true;
 
-    void Start()
+	private List<Transform> ObjectList = new List<Transform>();
+
+	void Start()
     {
 		Debug.Log(audioSource);
 		if(audioSource == null)
@@ -36,6 +38,15 @@ public class SpawnObject : MonoBehaviour
 			Collectables collect = Instantiate(Object,Location.position, Quaternion.identity, this.Parent).GetComponent<Collectables>();
 			collect?.AssignedAudioSource(audioSource);
 			ToSpawn = false;
+
+			//destroy when trees/coins are too much
+			//ObjectList.Add(collect.transform);
+			//if (ObjectList.Count > 20)
+		    //{
+			//	ObjectList.RemoveAt(1);
+			//	Destroy(transform.GetChild(1).gameObject);
+			//}
+
 			StartCoroutine(ToSpawnTrue());
 		}	
 	}
@@ -45,5 +56,6 @@ public class SpawnObject : MonoBehaviour
 		yield return new WaitForSeconds(spawnTime);
 		ToSpawn = true;
 		Debug.Log("spawned");
+
 	}
 }

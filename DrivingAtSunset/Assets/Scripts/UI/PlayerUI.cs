@@ -15,7 +15,7 @@ public class PlayerUI : MonoBehaviour
     private void Start()
     {
         _playerCharacter.CollectCoin += ChangeScore;
-        _playerCharacter.CollectTree += ChangeScoreNegative;
+        _playerCharacter.CollectObstacle += ChangeScoreNegative;
     }
 
     private void ChangeScore()
