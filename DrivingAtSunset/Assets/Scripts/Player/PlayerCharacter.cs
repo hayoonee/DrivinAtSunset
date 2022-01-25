@@ -43,7 +43,7 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Collectable"))
         {
-            string collectsType = other.gameObject.GetComponent<Collectables>().collectType;
+            string collectsType = System.Enum.GetName(typeof(CollectType), other.gameObject.GetComponent<Collectables>().collectType);
             collects.Add(collectsType);
             Destroy(other.gameObject);
         }

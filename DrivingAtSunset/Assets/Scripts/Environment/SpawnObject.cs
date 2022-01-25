@@ -8,6 +8,7 @@ public class SpawnObject : MonoBehaviour
 	public Transform Parent;
 	public GameObject Object;
 	[SerializeField] AudioSource audioSource;
+	[SerializeField, Range(0, 3)] float spawnTime;
 
 	public Transform Location;
 
@@ -41,7 +42,7 @@ public class SpawnObject : MonoBehaviour
 
 	IEnumerator ToSpawnTrue()
 	{
-		yield return new WaitForSeconds(0.75f);
+		yield return new WaitForSeconds(spawnTime);
 		ToSpawn = true;
 		Debug.Log("spawned");
 	}

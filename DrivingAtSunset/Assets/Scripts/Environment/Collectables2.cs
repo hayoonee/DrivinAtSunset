@@ -1,40 +1,21 @@
 using UnityEngine;
 using System.Collections;
 
-public enum CollectType
-{
-    up,
-    down
-}
 
-
-
-public class Collectables: MonoBehaviour
+public class Collectables2 : MonoBehaviour
 {
    private AudioSource audioSource;
 
-    public CollectType collectType;
+    public string collectType;
 
+   
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            float changePitch = 0;
-
-            switch (collectType)
-            {
-                case CollectType.up: changePitch = 0.1f;
-                    break;
-
-                case CollectType.down: changePitch = -0.2f;
-                    break;
-            }
-
-
-            audioSource.pitch += changePitch;
+            audioSource.pitch += Time.deltaTime * 1.1f;
         }
-
             Debug.Log(other.gameObject.tag+"_"+other.gameObject.name);
     }
 

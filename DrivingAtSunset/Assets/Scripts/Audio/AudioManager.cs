@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using System;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-
+    AudioSource audio;
     public static AudioManager instance;
 
     private void Start()
@@ -41,6 +42,16 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+        }
+    }
+
+    public void Update()
+
+    { if(!audio.isPlaying)
+        {
+
+            Debug.Log("Audio Stopped");
+            SceneManager.LoadScene(2);
         }
     }
 
