@@ -47,12 +47,12 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
 
-    { if(!audio.isPlaying)
-        {
+    {// if(!audio.isPlaying)
+    //    {
 
-            Debug.Log("Audio Stopped");
-            SceneManager.LoadScene(2);
-        }
+    //        Debug.Log("Audio Stopped");
+    //        SceneManager.LoadScene(2);
+    //    }
     }
 
     public void Play(string name)

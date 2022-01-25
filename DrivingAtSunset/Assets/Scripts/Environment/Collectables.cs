@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using System.Collections;
 
 public enum CollectType
@@ -18,19 +19,25 @@ public class Collectables: MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+       
         if (other.gameObject.CompareTag("Player"))
         {
             float changePitch = 0;
 
             switch (collectType)
             {
-                case CollectType.up: changePitch = 0.1f;
+                case CollectType.up:
+                    {
+                        changePitch = 0.1f;                     
+                    }
                     break;
 
-                case CollectType.down: changePitch = -0.2f;
+                case CollectType.down:
+                    {
+                        changePitch = -0.2f;
+                    }
                     break;
             }
-
 
             audioSource.pitch += changePitch;
         }
@@ -44,7 +51,7 @@ public class Collectables: MonoBehaviour
         
     }
 
-    
+
     /*Still road:
      * 
      * for each coin that spanws 
