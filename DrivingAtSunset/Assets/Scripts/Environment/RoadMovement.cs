@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class RoadMovement : MonoBehaviour
 {
+    /// <summary>
+    /// This script handles the movement of the road (not the car)
+    /// </summary>
+
     [SerializeField] Rigidbody _rb;
     [SerializeField] private float _speed = 31.0f;
 

@@ -8,6 +8,12 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    /// <summary>
+    /// This script manages all the audio aspects of the game.
+    /// It playes a audio source on the start of the game and enables playing an audio clip in code from 
+    /// anywhere in any script.
+    /// </summary>
+
     public Sound[] sounds;
 
    // AudioSource audio;
@@ -30,8 +36,9 @@ public class AudioManager : MonoBehaviour
             Debug.Log("duplicate Audiomanager");
             return;
         }
-
-        DontDestroyOnLoad(gameObject);//to help audio manager play audio between scenes without cutting music
+        
+        //To help audio manager play audio between scenes without cutting music
+        DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {
@@ -54,10 +61,10 @@ public class AudioManager : MonoBehaviour
     //    }
     }
 
+    //Add music to any part of code with this command:
+    //FindObjectOfType<AudioManager>().Play("*TrackName");
     public void Play(string name)
     {
-        //Add music to any part of code with this command:
-        //FindObjectOfType<AudioManager>().Play("*TrackName");
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         if (s == null)

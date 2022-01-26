@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
 {
+    /// <summary>
+    /// This script handles the player's ability to move the character.
+    /// </summary>
     [SerializeField] Rigidbody _rb;
     [SerializeField] Transform _transformPlayer;
 
@@ -18,7 +21,7 @@ public class PlayerCharacter : MonoBehaviour
     {       
         collects = new List<string>();
     }
-
+    
     void Update()
     {
         _transformPlayer.position = new Vector3(Mathf.Clamp(transform.position.x, -7.0f, 7.0f), transform.position.y, transform.position.z);
@@ -34,12 +37,12 @@ public class PlayerCharacter : MonoBehaviour
         }
     }
 
+    //Collision with the collectables destroy them.
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            CollectCoin?.Invoke();
-          
+            CollectCoin?.Invoke();      
         }
         if (other.gameObject.CompareTag("Tree"))
         {

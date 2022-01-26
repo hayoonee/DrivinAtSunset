@@ -6,13 +6,15 @@ using Random = UnityEngine.Random;
 
 public class MeshGenerator : MonoBehaviour
 {
+    /// <summary>
+    /// This script generates mesh for the background with the use of Perlin Noises.
+    /// </summary>
+    
     Mesh _mesh;
 
     Vector3[] vertices;
     int[] triangles;
 
-    //private int xSize = 100;
-    //private int zSize = 400; 
     private int xSize = 200;
     private int zSize = 800;
 
@@ -22,6 +24,9 @@ public class MeshGenerator : MonoBehaviour
         GetComponent<MeshFilter>().mesh = _mesh;
 
         CreateShape();
+
+        //InvokeRepeating is used for when you want to update something at a different time than the 
+        //engine itself.
         InvokeRepeating("UpdateMesh", 0.0f, 0.1f);
     }
 
@@ -39,13 +44,11 @@ public class MeshGenerator : MonoBehaviour
             {
                 float y = Mathf.PerlinNoise(x / 2.0f * randVal, z / 2.0f * randVal);
                 vertices[i] = new Vector3(x, y, z);
-              
-
                 i++;
             }
         }
 
-        //this is one square draw then itterated over each point
+        //this is one square drawn, then itterated over each point
         int vert = 0;
         int tris = 0;
         triangles = new int[xSize * zSize * 6];
@@ -64,8 +67,9 @@ public class MeshGenerator : MonoBehaviour
                 vert++;
                 tris += 6;
             }  
+           
+           //verts only connect with the ones next to them, not to the row and ahead of them as well
            vert++;
-            //verts only connect with the ones next to them, not to the row ahead of them as well
         }
     }
 

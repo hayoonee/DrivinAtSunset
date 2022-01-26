@@ -6,6 +6,10 @@ using UnityEngine.Audio;
 [System.Serializable]
 public class Sound
 {
+    /// <summary>
+    /// This class is used to define new audio sources that are implemented into the game.
+    /// </summary>
+    
     public string name;
 
     public AudioClip clip;

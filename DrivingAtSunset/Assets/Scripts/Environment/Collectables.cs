@@ -8,11 +8,14 @@ public enum CollectType
     down
 }
 
-
-
 public class Collectables: MonoBehaviour
 {
-   private AudioSource audioSource;
+    /// <summary>
+    /// This script handles the properties of the collectables, 
+    /// whether they increase or decrease the pitch of the audio.
+    /// </summary>
+   
+    private AudioSource audioSource;
 
     public CollectType collectType;
 

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class GameFlow : MonoBehaviour
 {
-    [SerializeField] private Transform _tileObj;
-    [SerializeField] private Transform _tileObj1;
-    [SerializeField] private Transform _tileObj2;
-    [SerializeField] private Transform _tileObj3;
-    [SerializeField] private Transform _tileObj4;
-    [SerializeField] private Transform _tileObj5;
-    [SerializeField] private Transform _tileObj6;
+    /// <summary>
+    /// This script handles how the tiles of the road is spawned and how they move.
+    /// </summary>
 
-    private List<Transform> RoadList = new List<Transform>();
+    [SerializeField] private Transform _tileObj, _tileObj1, _tileObj2, _tileObj3, _tileObj4, _tileObj5, _tileObj6;
+
+
+    private List<Transform> RoadList;
     private Vector3 nextTileSpawn;
 
 
@@ -20,17 +19,12 @@ public class GameFlow : MonoBehaviour
     {
         nextTileSpawn.z = 441;
         StartCoroutine(spawnTile());
-        
-        RoadList.Add(_tileObj);
-        RoadList.Add(_tileObj1);
-        RoadList.Add(_tileObj2);
-        RoadList.Add(_tileObj3);
-        RoadList.Add(_tileObj4);
-        RoadList.Add(_tileObj5);
-        RoadList.Add(_tileObj6);
+        RoadList = new List<Transform> { _tileObj, _tileObj1, _tileObj2,
+                                        _tileObj3, _tileObj4, _tileObj5, _tileObj6
+        };
     }
 
-
+    //Coroutine to spawn the tiles
     IEnumerator spawnTile()
     {
         yield return new WaitForSeconds(2f);
@@ -41,13 +35,13 @@ public class GameFlow : MonoBehaviour
         road.transform.parent = GameObject.Find("RoadGroup").transform;
         RoadList.Add(road);
 
-        //nextTileSpawn.z += 63;
-
+        
+        //List to destroy roads if there are more than 15 of them.
         if (RoadList.Count > 15)
         {
             RoadList.RemoveAt(1);
             //Destroy(transform.GetChild(1).gameObject);
-            Destroy(transform.GetChild(1).gameObject);
+            Destroy(transform.GetChild(2).gameObject);
         }
         
         StartCoroutine(spawnTile());

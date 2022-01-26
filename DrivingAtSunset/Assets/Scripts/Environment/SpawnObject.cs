@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SpawnObject : MonoBehaviour
 {
+	/// <summary>
+	/// This script handles the spawning of objects in the scene.
+	/// </summary>
+	
 	public Transform[] Positions;
 	public Transform Parent;
 	public GameObject Object;
@@ -40,11 +44,12 @@ public class SpawnObject : MonoBehaviour
 			ToSpawn = false;
 
 			//destroy when trees/coins are too much
+			
 			//ObjectList.Add(collect.transform);
 			//if (ObjectList.Count > 20)
 		    //{
 			//	ObjectList.RemoveAt(1);
-			//	Destroy(transform.GetChild(1).gameObject);
+		    //  Destroy(transform.GetChild(2).gameObject);
 			//}
 
 			StartCoroutine(ToSpawnTrue());

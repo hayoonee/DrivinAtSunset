@@ -6,6 +6,10 @@ using System;
 
 public class PlayerUI : MonoBehaviour
 {
+    /// <summary>
+    /// This script handles the player ui and the scoring system
+    /// </summary>
+
     [SerializeField] private PlayerCharacter _playerCharacter;
     [SerializeField] private TMP_Text _playerScoreTMP;
 
@@ -14,6 +18,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Start()
     {
+        //subscribe to the events
         _playerCharacter.CollectCoin += ChangeScore;
         _playerCharacter.CollectObstacle += ChangeScoreNegative;
     }
@@ -30,12 +35,15 @@ public class PlayerUI : MonoBehaviour
 
     private void Update()
     {
-       //Update the score, if the score goes below 0 -> just keep score 0
-        if (playerScore >= 0)
+        //Update the score, if the score goes below 0 -> just keep score 0
+        if (playerScore > 0)
         {
             _playerScoreTMP.text = $"Score: {playerScore}";
         }
         else
-            _playerScoreTMP.text = $"Score: {0}";
+        {
+            playerScore = 0;
+            _playerScoreTMP.text = $"Score: {playerScore}";
+        }
     }
 }
