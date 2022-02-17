@@ -19,6 +19,11 @@ public class Collectables: MonoBehaviour
 
     public CollectType collectType;
 
+    private void Awake()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {  
@@ -50,23 +55,8 @@ public class Collectables: MonoBehaviour
 
     public void AssignedAudioSource(AudioSource audio)
     {
+         
         audioSource = audio;
         
     }
-
-
-    /*Still road:
-     * 
-     * for each coin that spanws 
-     * move back to car and play sound for each collected coin
-     * 
-     */
-
-    /*Moving road:
-     * 
-     * each beat (where you want coin to be collected) needs to be at a specific location
-     * specific location is hard to predetermin on a random location
-     * 
-     */
-
 }

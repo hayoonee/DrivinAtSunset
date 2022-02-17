@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 using System;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(AudioSource))]
+//[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
     /// <summary>
@@ -18,10 +18,12 @@ public class AudioManager : MonoBehaviour
 
    // AudioSource audio;
     public static AudioManager instance;
+    public bool isSceneOver = false;
+    private Scene currentScene;
 
     private void Start()
     {
-        Play("Track01");
+        Play("Track1");
     }
 
     private void Awake()
@@ -43,22 +45,61 @@ public class AudioManager : MonoBehaviour
         foreach (Sound s in sounds)
         {
             if(s.source == null)
-            s.source = gameObject.GetComponent<AudioSource>();
+            s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
-
+            
+            s.source.name = s.name;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            Debug.Log("Current sounds are: " + s.name);
+
+            if (s.clip.name == "Track1")
+            {
+                s.source.enabled = true;
+            }
+            if (s.name== "Track2")
+            {
+                s.source.enabled = false;
+            }
         }
     }
 
-    public void Update()
-    {// if(!audio.isPlaying)
-    //    {
+    public void Update()   
+    {
+        //never gets enabled
+       
+        if ((!gameObject.GetComponent<AudioSource>().isPlaying) && (gameObject.GetComponent<AudioSource>().enabled == true))
+        {
+            Debug.Log("here");
+            Playscene2();     
+        }  
+    }
 
-    //        Debug.Log("Audio Stopped");
-    //        SceneManager.LoadScene(2);
-    //    }
+    private void Playscene2()
+    {     
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name == "EndScene")
+        {     
+            SceneManager.LoadScene(2);
+            foreach (Sound s in sounds)
+            {
+               
+                    if (s.name == "Track1")
+                    {
+                        s.source.enabled = false;
+                    }
+                    if (s.name == "Track2")
+                    {
+                        s.source.enabled = true;
+
+                    }
+                //s.source.clip = GetComponent<AudioClip>();
+                instance.Play("Track2");
+               //FindObjectOfType<AudioManager>().Play("Track2");
+            }
+        }      
     }
 
     //Add music to any part of code with this command:
