@@ -55,6 +55,11 @@ public class AudioManager : MonoBehaviour
         {
             SetVariables(1);
         }
+        
+        //if (currentScene.name == "EndScene")
+        //{
+        //    SetVariables(2);
+        //}
     }
 
 
@@ -93,6 +98,12 @@ public class AudioManager : MonoBehaviour
             //yield break;
 
         }
+
+        // Add music to last scene after hyoon did 
+        //if ((currentScene.name == "Level2") && (currentScene.name == "EndScene"))
+        //{
+            
+        //}
     }
 
     //Add music to any part of code with this command:
