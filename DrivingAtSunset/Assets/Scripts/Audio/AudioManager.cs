@@ -16,14 +16,15 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] sounds;
 
-   // AudioSource audio;
+    private AudioSource audio;
     public static AudioManager instance;
-    public bool isSceneOver = false;
+    
     private Scene currentScene;
 
+    private float clipTime;
     private void Start()
     {
-        Play("Track1");
+        StartCoroutine(StartNextScene());
     }
 
     private void Awake()
@@ -38,72 +39,65 @@ public class AudioManager : MonoBehaviour
             Debug.Log("duplicate Audiomanager");
             return;
         }
-        
+
         //To help audio manager play audio between scenes without cutting music
         DontDestroyOnLoad(gameObject);
 
-        foreach (Sound s in sounds)
-        {
-            if(s.source == null)
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            
-            s.source.name = s.name;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            Debug.Log("Current sounds are: " + s.name);
+        currentScene = SceneManager.GetActiveScene();
 
-            if (s.clip.name == "Track1")
-            {
-                s.source.enabled = true;
-            }
-            if (s.name== "Track2")
-            {
-                s.source.enabled = false;
-            }
+        //Sets all the variables of the audio clips.
+        if (currentScene.name == "DrivingAtSunset")
+        {
+            SetVariables(0);
+        }
+
+        if (currentScene.name == "Level2")
+        {
+            SetVariables(1);
         }
     }
 
-    public void Update()   
+
+    private void SetVariables(int i)
     {
-        //never gets enabled
-       
-        if ((!gameObject.GetComponent<AudioSource>().isPlaying) && (gameObject.GetComponent<AudioSource>().enabled == true))
-        {
-            Debug.Log("here");
-            Playscene2();     
-        }  
+        audio = gameObject.AddComponent<AudioSource>();
+
+        if (audio == null)
+            return;
+
+        audio.clip = sounds[i].clip;
+
+        //s.source.name = s.name;
+        audio.volume = sounds[i].volume;
+        audio.pitch = sounds[i].pitch;
+        audio.loop = sounds[i].loop;
+        
+            Debug.Log("loot at me");
+            audio.Play();
+    
     }
 
-    private void Playscene2()
-    {     
-        Scene currentScene = SceneManager.GetActiveScene();
+    private IEnumerator StartNextScene()
+    {
+        currentScene = SceneManager.GetActiveScene();
 
-        if (currentScene.name == "EndScene")
-        {     
+        if (currentScene.name != "Level2")
+        {
+                 
+            yield return new WaitWhile(() => audio.isPlaying);
+            
             SceneManager.LoadScene(2);
-            foreach (Sound s in sounds)
-            {
-               
-                    if (s.name == "Track1")
-                    {
-                        s.source.enabled = false;
-                    }
-                    if (s.name == "Track2")
-                    {
-                        s.source.enabled = true;
+            audio.clip = sounds[1].clip;
+            audio.Play();
 
-                    }
-                //s.source.clip = GetComponent<AudioClip>();
-                instance.Play("Track2");
-               //FindObjectOfType<AudioManager>().Play("Track2");
-            }
-        }      
+            //yield break;
+
+        }
     }
 
     //Add music to any part of code with this command:
     //FindObjectOfType<AudioManager>().Play("*TrackName");
+    //Doens't work anymore, changed architechture
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
