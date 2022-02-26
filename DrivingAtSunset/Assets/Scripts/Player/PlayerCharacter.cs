@@ -42,11 +42,14 @@ public class PlayerCharacter : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Coin"))
         {
-            CollectCoin?.Invoke();      
+            CollectCoin?.Invoke();
+            Debug.Log("Coin collected");
         }
         if (other.gameObject.CompareTag("Tree"))
         {
             CollectObstacle?.Invoke();
+            Debug.Log("Tree collected");
+
         }
 
         if ((other.gameObject.CompareTag("Coin")) || (other.gameObject.CompareTag("Tree")))

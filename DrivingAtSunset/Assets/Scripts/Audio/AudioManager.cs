@@ -17,7 +17,8 @@ public class AudioManager : MonoBehaviour
     public Sound[] soundsArray;
     private Sound sound;
     private AudioSource audio;
-    private AudioSource audioCoin;
+    private AudioSource audioAbmientCoin;
+    private AudioSource audioAbmientTree;
     public static AudioManager instance;
 
     private PlayerCharacter player;
@@ -37,6 +38,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("duplicate Audiomanager");
             return;
         }
+
         DontDestroyOnLoad(gameObject);
         //To help audio manager play audio between scenes without cutting music.
 
@@ -60,13 +62,6 @@ public class AudioManager : MonoBehaviour
         {
             SetAudioVariables(1);
         }
-
-        //SetAudioCoinVariables();
-
-        //if (currentScene.name == "EndScene")
-        //{
-        //    SetVariables(2);
-        //}
     }
 
 
@@ -74,10 +69,14 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartNextScene());
-        SetAudioCoinVariables();
 
-        //player = GetComponent<PlayerCharacter>();
-        player.CollectCoin += PlayCoindAudio;
+        SetAudioCoinVariables();
+        SetAudioTreeVariables();
+        SetAudioVariables(4);
+        
+        player.CollectCoin += PlayAmbientAudio;
+        player.CollectObstacle += PlayTreeAmbientAudio;
+
     }
 
     private void SetAudioVariables(int i)
@@ -88,8 +87,6 @@ public class AudioManager : MonoBehaviour
             return;
 
         audio.clip = soundsArray[i].clip;
-
-        //s.source.name = s.name;
         audio.volume = soundsArray[i].volume;
         audio.pitch = soundsArray[i].pitch;
         audio.loop = soundsArray[i].loop;
@@ -99,17 +96,29 @@ public class AudioManager : MonoBehaviour
 
     public void SetAudioCoinVariables()
     {
-        audioCoin = gameObject.AddComponent<AudioSource>();
+        audioAbmientCoin = gameObject.AddComponent<AudioSource>();
 
-        if (audioCoin == null)
+        if (audioAbmientCoin == null)
             return;
 
-        audioCoin.clip = soundsArray[2].clip;
+        audioAbmientCoin.clip = soundsArray[2].clip;
+        audioAbmientCoin.volume = soundsArray[2].volume;
+        audioAbmientCoin.pitch = soundsArray[2].pitch;
+        audioAbmientCoin.loop = soundsArray[2].loop;
 
-        //s.source.name = s.name;
-        audioCoin.volume = soundsArray[2].volume;
-        audioCoin.pitch = soundsArray[2].pitch;
-        audioCoin.loop = soundsArray[2].loop;
+
+    }
+    public void SetAudioTreeVariables()
+    {
+        audioAbmientTree = gameObject.AddComponent<AudioSource>();
+
+        if (audioAbmientCoin == null)
+            return;
+
+        audioAbmientTree.clip = soundsArray[3].clip;
+        audioAbmientTree.volume = soundsArray[3].volume;
+        audioAbmientTree.pitch = soundsArray[3].pitch;
+        audioAbmientTree.loop = soundsArray[3].loop;
 
     }
 
@@ -125,12 +134,14 @@ public class AudioManager : MonoBehaviour
 
             SceneManager.LoadScene(2);
             audio.clip = soundsArray[1].clip;
+            
             audio.Play();
-
+            SetAudioVariables(4);
             //yield break;
 
         }
 
+        
         // Add music to last scene after hyoon did 
         //if ((currentScene.name == "Level2") && (currentScene.name == "EndScene"))
         //{
@@ -138,9 +149,13 @@ public class AudioManager : MonoBehaviour
         //}
     }
 
-    private void PlayCoindAudio()
+    private void PlayAmbientAudio()
     {
-        audioCoin.Play();
+        audioAbmientCoin.Play();
     }
 
+    private void PlayTreeAmbientAudio()
+    {
+        audioAbmientTree.Play();
+    }
 }
