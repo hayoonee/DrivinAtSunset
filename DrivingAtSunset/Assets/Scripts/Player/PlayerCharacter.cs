@@ -10,7 +10,7 @@ public class PlayerCharacter : MonoBehaviour
     [SerializeField] Rigidbody _rb;
     [SerializeField] Transform _transformPlayer;
 
-    [SerializeField] private float _speed = 31.0f;
+    //[SerializeField] private float _speed = 31.0f;
     public List<string> collects;
 
     public event System.Action CollectCoin;

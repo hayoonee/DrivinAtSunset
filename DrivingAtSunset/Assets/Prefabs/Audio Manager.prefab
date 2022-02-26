@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,10 +44,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f389d032422dc3d4395e617db2e0666b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - name: Track01
+  soundsArray:
+  - name: Track1
     clip: {fileID: 8300000, guid: 095c993c3c8794b7fa4fa1702b6be5c6, type: 3}
-    volume: 1
+    volume: 0.3
     pitch: 1
     loop: 0
+    source: {fileID: 0}
+  - name: Track2
+    clip: {fileID: 8300000, guid: e480a1caad88c499da899689842e3f2d, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Track3
+    clip: {fileID: 8300000, guid: de468a349c64e5a408382bb503573617, type: 3}
+    volume: 0.03
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Track4
+    clip: {fileID: 8300000, guid: 43f5adeb44001f74da9846f3cc23675d, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Track5
+    clip: {fileID: 8300000, guid: 303170ed286428b4ebdd1e64152e5ddc, type: 3}
+    volume: 0.03
+    pitch: 1
+    loop: 1
     source: {fileID: 0}

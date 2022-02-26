@@ -48,7 +48,6 @@ public class AudioManager : MonoBehaviour
 
 
         currentScene = SceneManager.GetActiveScene();
-        /*audio = gameObject.AddComponent<AudioSource>();*/
 
         //Sets all the variables of the audio sources.
         if (currentScene.name == "DrivingAtSunset")
@@ -58,7 +57,7 @@ public class AudioManager : MonoBehaviour
 
         if (currentScene.name == "Level2")
         {
-            SetAudioVariables(1);         
+            SetAudioVariables(1);
         }
     }
 
@@ -74,14 +73,13 @@ public class AudioManager : MonoBehaviour
             SetAudioCarVariables();
         }
        
-        //SetAudioVariables(4);
 
         player.CollectCoin += PlayCoinAmbientAudio;
         player.CollectObstacle += PlayTreeAmbientAudio;
 
     }
 
-    private void SetAudioVariables(int i)
+    public void SetAudioVariables(int i)
     {
         audio = gameObject.AddComponent<AudioSource>();
 
@@ -145,11 +143,11 @@ public class AudioManager : MonoBehaviour
     private IEnumerator StartNextScene()
     {
         currentScene = SceneManager.GetActiveScene();
-        Debug.Log("Here1");
 
-        if ((currentScene.name == "DrivingAtSunset") /*&& (currentScene.name != "Level2")*/)
+
+        if (currentScene.name == "DrivingAtSunset")
         {
-            Debug.Log("Here 2");
+
 
                 yield return new WaitWhile(() => audio.isPlaying);
                 SceneManager.LoadScene(2);
@@ -164,15 +162,9 @@ public class AudioManager : MonoBehaviour
         }
         else if (currentScene.name == "Level2")
         {
-            Destroy(audioAbmientCoin);
-            Destroy(audioAbmientTree);
-            Destroy(audioAbmientCar);
-            Destroy(audio);
-
             SetAudioCoinVariables();
             SetAudioTreeVariables();
             SetAudioCarVariables();
-            SetAudioVariables(1);
 
         }
 

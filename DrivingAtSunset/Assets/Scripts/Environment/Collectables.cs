@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public enum CollectType
 {
@@ -15,19 +16,22 @@ public class Collectables: MonoBehaviour
     /// whether they increase or decrease the pitch of the audio.
     /// </summary>
    
-    private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource, audioSource2;
+    private Scene currentScene;
 
     public CollectType collectType;
-
+    private AudioManager audioManager;
     private void Awake()
     {
-        //if (audioSource != null)
-        //{
-        //    audioSource = FindObjectOfType<AudioSource>();
-        //}
-        //else
-        audioSource = gameObject.AddComponent<AudioSource>(); 
-        
+        currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == "Level2")
+        {
+            audioManager = FindObjectOfType<AudioManager>();
+            audioSource2 = audioManager.GetComponent<AudioSource>();
+        }
+        else
+        audioSource = gameObject.AddComponent<AudioSource>();
+        Debug.Log("Audio source is: " + audioSource2.clip.name);
     }
 
 
@@ -36,6 +40,14 @@ public class Collectables: MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             float changePitch = 0;
+            Debug.Log("AudioSource is: " + audioSource.clip.name);
+           
+            if (currentScene.name == "Level2")
+            {
+                audioSource = audioSource2;
+            }
+
+            Debug.Log("AudioSource is: " + audioSource.clip.name);
 
             switch (collectType)
             {

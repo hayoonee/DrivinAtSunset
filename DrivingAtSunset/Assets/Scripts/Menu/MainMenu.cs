@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
     /// This script handles the loading the scenes.
     /// </summary>
 
+    
+
     public void PlayGame()
     {
         SceneManager.LoadScene(1);
