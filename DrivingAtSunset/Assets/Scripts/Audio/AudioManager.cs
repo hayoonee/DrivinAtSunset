@@ -14,19 +14,17 @@ public class AudioManager : MonoBehaviour
     /// anywhere in any script.
     /// </summary>
 
-    public Sound[] sounds;
-
+    public Sound[] soundsArray;
+    private Sound sound;
     private AudioSource audio;
+    private AudioSource audioCoin;
     public static AudioManager instance;
-    
+
+    private PlayerCharacter player;
     private Scene currentScene;
 
-    private float clipTime;
-    private void Start()
-    {
-        StartCoroutine(StartNextScene());
-    }
 
+  
     private void Awake()
     {
         if (instance == null)
@@ -39,23 +37,32 @@ public class AudioManager : MonoBehaviour
             Debug.Log("duplicate Audiomanager");
             return;
         }
-
-        //To help audio manager play audio between scenes without cutting music
         DontDestroyOnLoad(gameObject);
+        //To help audio manager play audio between scenes without cutting music.
+
+
+        Sound s = Array.Find(soundsArray, sound => sound.name == name);
+
+
+        player = FindObjectOfType<PlayerCharacter>();
+
 
         currentScene = SceneManager.GetActiveScene();
 
-        //Sets all the variables of the audio clips.
+
+        //Sets all the variables of the audio sources.
         if (currentScene.name == "DrivingAtSunset")
         {
-            SetVariables(0);
+            SetAudioVariables(0);
         }
 
         if (currentScene.name == "Level2")
         {
-            SetVariables(1);
+            SetAudioVariables(1);
         }
-        
+
+        //SetAudioCoinVariables();
+
         //if (currentScene.name == "EndScene")
         //{
         //    SetVariables(2);
@@ -63,24 +70,49 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    private void SetVariables(int i)
+
+    private void Start()
+    {
+        StartCoroutine(StartNextScene());
+        SetAudioCoinVariables();
+
+        //player = GetComponent<PlayerCharacter>();
+        player.CollectCoin += PlayCoindAudio;
+    }
+
+    private void SetAudioVariables(int i)
     {
         audio = gameObject.AddComponent<AudioSource>();
 
         if (audio == null)
             return;
 
-        audio.clip = sounds[i].clip;
+        audio.clip = soundsArray[i].clip;
 
         //s.source.name = s.name;
-        audio.volume = sounds[i].volume;
-        audio.pitch = sounds[i].pitch;
-        audio.loop = sounds[i].loop;
-        
-            Debug.Log("loot at me");
-            audio.Play();
-    
+        audio.volume = soundsArray[i].volume;
+        audio.pitch = soundsArray[i].pitch;
+        audio.loop = soundsArray[i].loop;
+
+        audio.Play();
     }
+
+    public void SetAudioCoinVariables()
+    {
+        audioCoin = gameObject.AddComponent<AudioSource>();
+
+        if (audioCoin == null)
+            return;
+
+        audioCoin.clip = soundsArray[2].clip;
+
+        //s.source.name = s.name;
+        audioCoin.volume = soundsArray[2].volume;
+        audioCoin.pitch = soundsArray[2].pitch;
+        audioCoin.loop = soundsArray[2].loop;
+
+    }
+
 
     private IEnumerator StartNextScene()
     {
@@ -88,11 +120,11 @@ public class AudioManager : MonoBehaviour
 
         if (currentScene.name != "Level2")
         {
-                 
+
             yield return new WaitWhile(() => audio.isPlaying);
-            
+
             SceneManager.LoadScene(2);
-            audio.clip = sounds[1].clip;
+            audio.clip = soundsArray[1].clip;
             audio.Play();
 
             //yield break;
@@ -102,23 +134,13 @@ public class AudioManager : MonoBehaviour
         // Add music to last scene after hyoon did 
         //if ((currentScene.name == "Level2") && (currentScene.name == "EndScene"))
         //{
-            
+
         //}
     }
 
-    //Add music to any part of code with this command:
-    //FindObjectOfType<AudioManager>().Play("*TrackName");
-    //Doens't work anymore, changed architechture
-    public void Play(string name)
+    private void PlayCoindAudio()
     {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-
-        if (s == null)
-        {
-            Debug.LogWarning("Sound: " + name + " not found!");
-            return;
-        }
-
-        s.source.Play();
+        audioCoin.Play();
     }
+
 }

@@ -12,6 +12,7 @@ public class SpawnObject : MonoBehaviour
 	public Transform Parent;
 	public GameObject Object;
 	[SerializeField] AudioSource audioSource;
+	//private AudioManager audioManager;
 	[SerializeField, Range(0, 3)] float spawnTime;
 
 	public Transform Location;
@@ -22,6 +23,7 @@ public class SpawnObject : MonoBehaviour
 
 	void Start()
     {
+		//audioManager = FindObjectOfType<AudioManager>();
 		Debug.Log(audioSource);
 		if(audioSource == null)
         {
