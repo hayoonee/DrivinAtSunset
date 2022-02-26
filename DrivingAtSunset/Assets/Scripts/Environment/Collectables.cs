@@ -21,7 +21,13 @@ public class Collectables: MonoBehaviour
 
     private void Awake()
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
+        //if (audioSource != null)
+        //{
+        //    audioSource = FindObjectOfType<AudioSource>();
+        //}
+        //else
+        audioSource = gameObject.AddComponent<AudioSource>(); 
+        
     }
 
 
@@ -47,7 +53,7 @@ public class Collectables: MonoBehaviour
             }
 
             audioSource.pitch += changePitch;
-            Debug.LogWarning("Pitch at: " + audioSource.pitch);
+            Debug.LogWarning("Pitch " + audioSource.clip.name + " is at: " + audioSource.pitch);
         }
 
             Debug.Log(other.gameObject.tag+"_"+other.gameObject.name);

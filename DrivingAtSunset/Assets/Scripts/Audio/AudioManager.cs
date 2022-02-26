@@ -16,16 +16,14 @@ public class AudioManager : MonoBehaviour
 
     public Sound[] soundsArray;
     private Sound sound;
-    private AudioSource audio;
-    private AudioSource audioAbmientCoin;
-    private AudioSource audioAbmientTree;
+    private AudioSource audio, audioAbmientCoin, audioAbmientTree, audioAbmientCar;
     public static AudioManager instance;
 
     private PlayerCharacter player;
     private Scene currentScene;
 
 
-  
+
     private void Awake()
     {
         if (instance == null)
@@ -50,7 +48,7 @@ public class AudioManager : MonoBehaviour
 
 
         currentScene = SceneManager.GetActiveScene();
-
+        /*audio = gameObject.AddComponent<AudioSource>();*/
 
         //Sets all the variables of the audio sources.
         if (currentScene.name == "DrivingAtSunset")
@@ -60,7 +58,7 @@ public class AudioManager : MonoBehaviour
 
         if (currentScene.name == "Level2")
         {
-            SetAudioVariables(1);
+            SetAudioVariables(1);         
         }
     }
 
@@ -69,12 +67,16 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(StartNextScene());
+        if (currentScene.name == "DrivingAtSunset")
+        {
+            SetAudioCoinVariables();
+            SetAudioTreeVariables();
+            SetAudioCarVariables();
+        }
+       
+        //SetAudioVariables(4);
 
-        SetAudioCoinVariables();
-        SetAudioTreeVariables();
-        SetAudioVariables(4);
-        
-        player.CollectCoin += PlayAmbientAudio;
+        player.CollectCoin += PlayCoinAmbientAudio;
         player.CollectObstacle += PlayTreeAmbientAudio;
 
     }
@@ -108,6 +110,7 @@ public class AudioManager : MonoBehaviour
 
 
     }
+
     public void SetAudioTreeVariables()
     {
         audioAbmientTree = gameObject.AddComponent<AudioSource>();
@@ -122,26 +125,58 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    public void SetAudioCarVariables()
+    {
+        audioAbmientCar = gameObject.AddComponent<AudioSource>();
+
+        if (audioAbmientCoin == null)
+            return;
+
+        audioAbmientCar.clip = soundsArray[4].clip;
+        audioAbmientCar.volume = soundsArray[4].volume;
+        audioAbmientCar.pitch = soundsArray[4].pitch;
+        audioAbmientCar.loop = soundsArray[4].loop;
+
+        PlayCarAmbientAudio();
+
+    }
+
 
     private IEnumerator StartNextScene()
     {
         currentScene = SceneManager.GetActiveScene();
+        Debug.Log("Here1");
 
-        if (currentScene.name != "Level2")
+        if ((currentScene.name == "DrivingAtSunset") /*&& (currentScene.name != "Level2")*/)
         {
+            Debug.Log("Here 2");
 
-            yield return new WaitWhile(() => audio.isPlaying);
+                yield return new WaitWhile(() => audio.isPlaying);
+                SceneManager.LoadScene(2);
+                audio.clip = soundsArray[1].clip;
+                audio.pitch = 1;
+                audio.Play();
+                //SetAudioVariables(4);
+            //}
 
-            SceneManager.LoadScene(2);
-            audio.clip = soundsArray[1].clip;
-            
-            audio.Play();
-            SetAudioVariables(4);
             //yield break;
 
         }
+        else if (currentScene.name == "Level2")
+        {
+            Destroy(audioAbmientCoin);
+            Destroy(audioAbmientTree);
+            Destroy(audioAbmientCar);
+            Destroy(audio);
 
-        
+            SetAudioCoinVariables();
+            SetAudioTreeVariables();
+            SetAudioCarVariables();
+            SetAudioVariables(1);
+
+        }
+
+
         // Add music to last scene after hyoon did 
         //if ((currentScene.name == "Level2") && (currentScene.name == "EndScene"))
         //{
@@ -149,7 +184,7 @@ public class AudioManager : MonoBehaviour
         //}
     }
 
-    private void PlayAmbientAudio()
+    private void PlayCoinAmbientAudio()
     {
         audioAbmientCoin.Play();
     }
@@ -158,4 +193,9 @@ public class AudioManager : MonoBehaviour
     {
         audioAbmientTree.Play();
     }
+    private void PlayCarAmbientAudio()
+    {
+        audioAbmientCar.Play();
+    }
 }
+
