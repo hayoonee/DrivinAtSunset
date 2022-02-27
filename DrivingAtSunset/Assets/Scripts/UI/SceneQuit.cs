@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SceneQuit : MonoBehaviour
 {
-    
+
+    public GameObject HowToPlayPanel;
 
     // Update is called once per frame
     void Update()

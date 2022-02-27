@@ -53,13 +53,14 @@ public class Collectables: MonoBehaviour
             {
                 case CollectType.up:
                     {
-                        changePitch = 0.1f;//need to clamp this number
+                        changePitch = 0.01f;//need to clamp this number
+                        
                     }
                     break;
 
                 case CollectType.down:
                     {
-                        changePitch = -0.2f;//need to clamp this number
+                        changePitch = -0.1f;//need to clamp this number
                     }
                     break;
             }
