@@ -11,7 +11,8 @@ public class PlayerUI : MonoBehaviour
     /// </summary>
 
     [SerializeField] private PlayerCharacter _playerCharacter;
-    [SerializeField] private TMP_Text _playerScoreTMP;
+    [SerializeField] private TMP_Text _playerScore;
+    [SerializeField] private TMP_Text _playerControls;
 
     private int playerScore = 0;
     
@@ -21,8 +22,13 @@ public class PlayerUI : MonoBehaviour
         //subscribe to the events
         _playerCharacter.CollectCoin += ChangeScore;
         _playerCharacter.CollectObstacle += ChangeScoreNegative;
+        _playerControls.enabled = true;
+        
+        IControlls();
     }
 
+
+    
     private void ChangeScore()
     {
         playerScore += 30;
@@ -38,12 +44,18 @@ public class PlayerUI : MonoBehaviour
         //Update the score, if the score goes below 0 -> just keep score 0
         if (playerScore > 0)
         {
-            _playerScoreTMP.text = $"Score: {playerScore}";
+            _playerScore.text = $"Score: {playerScore}";
         }
         else
         {
             playerScore = 0;
-            _playerScoreTMP.text = $"Score: {playerScore}";
+            _playerScore.text = $"Score: {playerScore}";
         }
+    }
+
+    private IEnumerator IControlls()
+    {
+        yield return new WaitForSecondsRealtime(10);
+        _playerControls.enabled = false;
     }
 }

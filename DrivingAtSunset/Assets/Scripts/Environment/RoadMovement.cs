@@ -28,7 +28,4 @@ public class RoadMovement : MonoBehaviour
             _rb.velocity = new Vector3(0, 0, -_speed / 1.5f);
         }
     }
-
-
-
 }

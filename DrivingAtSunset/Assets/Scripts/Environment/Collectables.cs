@@ -34,7 +34,6 @@ public class Collectables: MonoBehaviour
             audioSource = gameObject.AddComponent<AudioSource>();
             Destroy(audioSource2);
         }
-        //Debug.Log("Audio source is: " + audioSource2.clip.name);
     }
 
 
@@ -50,20 +49,20 @@ public class Collectables: MonoBehaviour
                 audioSource = audioSource2;
             }
 
-            Debug.Log("AudioSource is: " + audioSource.clip.name);
+  
 
             switch (collectType)
             {
                 case CollectType.up:
                     {
-                        changePitch = 0.01f;//need to clamp this number
+                        changePitch = 0.01f;
                         
                     }
                     break;
 
                 case CollectType.down:
                     {
-                        changePitch = -0.05f;//need to clamp this number
+                        changePitch = -0.05f;
                     }
                     break;
             }

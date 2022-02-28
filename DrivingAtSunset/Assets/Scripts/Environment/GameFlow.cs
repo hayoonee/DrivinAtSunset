@@ -43,20 +43,20 @@ public class GameFlow : MonoBehaviour
 
         if (scene.name == "Level2")
         {
+            //List to destroy roads if there are too many of them.
             if (RoadList.Count > 55)
             {
                 RoadList.RemoveAt(1);
-                //Destroy(transform.GetChild(1).gameObject);
+
                 Destroy(transform.GetChild(2).gameObject);
             }
         }
         else if (scene.name == "DrivingAtSunset")
         {
-            //List to destroy roads if there are more than 15 of them.
             if (RoadList.Count > 15)
             {
                 RoadList.RemoveAt(1);
-                //Destroy(transform.GetChild(1).gameObject);
+  
                 Destroy(transform.GetChild(2).gameObject);
             }
         }
