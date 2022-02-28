@@ -37,8 +37,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        DontDestroyOnLoad(gameObject);
         //To help audio manager play audio between scenes without cutting music.
+        DontDestroyOnLoad(gameObject);
 
 
         Sound s = Array.Find(soundsArray, sound => sound.name == name);
@@ -65,7 +65,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartNextScene());
+        StartCoroutine(IStartNextScene());
         if (currentScene.name == "DrivingAtSunset")
         {
             SetAudioCoinVariables();
@@ -73,10 +73,19 @@ public class AudioManager : MonoBehaviour
             SetAudioCarVariables();
         }
        
-
         player.CollectCoin += PlayCoinAmbientAudio;
         player.CollectObstacle += PlayTreeAmbientAudio;
 
+    }
+
+
+    private void Update()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        if ((currentScene.name == "Level2") && (!audio.isPlaying))
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void SetAudioVariables(int i)
@@ -136,11 +145,10 @@ public class AudioManager : MonoBehaviour
         audioAbmientCar.loop = soundsArray[4].loop;
 
         PlayCarAmbientAudio();
-
     }
 
 
-    private IEnumerator StartNextScene()
+    private IEnumerator IStartNextScene()
     {
         currentScene = SceneManager.GetActiveScene();
 
@@ -154,11 +162,6 @@ public class AudioManager : MonoBehaviour
                 audio.clip = soundsArray[1].clip;
                 audio.pitch = 1;
                 audio.Play();
-                //SetAudioVariables(4);
-            //}
-
-            //yield break;
-
         }
         else if (currentScene.name == "Level2")
         {
@@ -167,13 +170,6 @@ public class AudioManager : MonoBehaviour
             SetAudioCarVariables();
 
         }
-
-
-        // Add music to last scene after hyoon did 
-        //if ((currentScene.name == "Level2") && (currentScene.name == "EndScene"))
-        //{
-
-        //}
     }
 
     private void PlayCoinAmbientAudio()

@@ -12,7 +12,7 @@ public class SpawnObject : MonoBehaviour
 	public Transform Parent;
 	public GameObject Object;
 	[SerializeField] AudioSource audioSource;
-	//private AudioManager audioManager;
+	
 	[SerializeField, Range(0, 3)] float spawnTime;
 
 	public Transform Location;
@@ -23,7 +23,7 @@ public class SpawnObject : MonoBehaviour
 
 	void Start()
     {
-		//audioManager = FindObjectOfType<AudioManager>();
+	
 		Debug.Log(audioSource);
 		if(audioSource == null)
         {
@@ -45,15 +45,6 @@ public class SpawnObject : MonoBehaviour
 			collect?.AssignedAudioSource(audioSource);
 			ToSpawn = false;
 
-			//destroy when trees/coins are too much
-			
-			//ObjectList.Add(collect.transform);
-			//if (ObjectList.Count > 20)
-		    //{
-			//	ObjectList.RemoveAt(1);
-		    //  Destroy(transform.GetChild(2).gameObject);
-			//}
-
 			StartCoroutine(ToSpawnTrue());
 		}	
 	}
@@ -63,6 +54,5 @@ public class SpawnObject : MonoBehaviour
 		yield return new WaitForSeconds(spawnTime);
 		ToSpawn = true;
 		Debug.Log("spawned");
-
 	}
 }

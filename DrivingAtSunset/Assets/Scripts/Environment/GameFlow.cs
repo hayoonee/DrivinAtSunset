@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameFlow : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class GameFlow : MonoBehaviour
 
     [SerializeField] private Transform _tileObj, _tileObj1, _tileObj2, _tileObj3, _tileObj4, _tileObj5, _tileObj6;
 
-
+    private Scene scene;
     private List<Transform> RoadList;
     private Vector3 nextTileSpawn;
 
@@ -24,26 +25,45 @@ public class GameFlow : MonoBehaviour
         };
     }
 
+    private void Update()
+    {
+        scene = SceneManager.GetActiveScene();
+    }
+
     //Coroutine to spawn the tiles
     IEnumerator spawnTile()
     {
         yield return new WaitForSeconds(2f);
 
-        nextTileSpawn.z = 63f + RoadList[RoadList.Count -1].position.z;
-       var road = Instantiate(_tileObj, nextTileSpawn, _tileObj.rotation);
+        nextTileSpawn.z = 63f + RoadList[RoadList.Count - 1].position.z;
+        var road = Instantiate(_tileObj, nextTileSpawn, _tileObj.rotation);
 
         road.transform.parent = GameObject.Find("RoadGroup").transform;
         RoadList.Add(road);
 
-        
-        //List to destroy roads if there are more than 15 of them.
-        if (RoadList.Count > 15)
+        if (scene.name == "Level2")
         {
-            RoadList.RemoveAt(1);
-            //Destroy(transform.GetChild(1).gameObject);
-            Destroy(transform.GetChild(2).gameObject);
+            //List to destroy roads if there are too many of them.
+            if (RoadList.Count > 55)
+            {
+                RoadList.RemoveAt(1);
+
+                Destroy(transform.GetChild(2).gameObject);
+            }
         }
-        
+        else if (scene.name == "DrivingAtSunset")
+        {
+            if (RoadList.Count > 15)
+            {
+                RoadList.RemoveAt(1);
+  
+                Destroy(transform.GetChild(2).gameObject);
+            }
+        }
+
+
+
+
         StartCoroutine(spawnTile());
     }
 
