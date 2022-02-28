@@ -30,7 +30,7 @@ public class PlayerUI : MonoBehaviour
 
     private void ChangeScoreNegative()
     {
-        playerScore -= 30;
+        playerScore -= 100;
     }
 
     private void Update()

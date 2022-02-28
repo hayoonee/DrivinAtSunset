@@ -79,6 +79,17 @@ public class AudioManager : MonoBehaviour
 
     }
 
+
+    private void Update()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        // Add music to last scene after hyoon did 
+        if ((currentScene.name == "Level2") && (!audio.isPlaying))
+        {
+            SceneManager.LoadScene(3);
+        }
+    }
+
     public void SetAudioVariables(int i)
     {
         audio = gameObject.AddComponent<AudioSource>();

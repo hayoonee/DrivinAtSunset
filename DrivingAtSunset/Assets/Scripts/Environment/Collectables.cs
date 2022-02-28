@@ -30,8 +30,11 @@ public class Collectables: MonoBehaviour
             audioSource2 = audioManager.GetComponent<AudioSource>();
         }
         else
-        audioSource = gameObject.AddComponent<AudioSource>();
-        Debug.Log("Audio source is: " + audioSource2.clip.name);
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            Destroy(audioSource2);
+        }
+        //Debug.Log("Audio source is: " + audioSource2.clip.name);
     }
 
 
@@ -60,7 +63,7 @@ public class Collectables: MonoBehaviour
 
                 case CollectType.down:
                     {
-                        changePitch = -0.1f;//need to clamp this number
+                        changePitch = -0.05f;//need to clamp this number
                     }
                     break;
             }
