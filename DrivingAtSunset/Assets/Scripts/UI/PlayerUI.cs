@@ -12,19 +12,14 @@ public class PlayerUI : MonoBehaviour
 
     [SerializeField] private PlayerCharacter _playerCharacter;
     [SerializeField] private TMP_Text _playerScore;
-    [SerializeField] private TMP_Text _playerControls;
 
     private int playerScore = 0;
     
-
     private void Start()
     {
         //subscribe to the events
         _playerCharacter.CollectCoin += ChangeScore;
         _playerCharacter.CollectObstacle += ChangeScoreNegative;
-        _playerControls.enabled = true;
-        
-        IControlls();
     }
 
 
@@ -51,11 +46,5 @@ public class PlayerUI : MonoBehaviour
             playerScore = 0;
             _playerScore.text = $"Score: {playerScore}";
         }
-    }
-
-    private IEnumerator IControlls()
-    {
-        yield return new WaitForSecondsRealtime(10);
-        _playerControls.enabled = false;
     }
 }

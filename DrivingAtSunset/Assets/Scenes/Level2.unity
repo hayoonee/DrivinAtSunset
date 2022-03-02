@@ -602,7 +602,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCharacter: {fileID: 845717702}
-  _playerScoreTMP: {fileID: 1715068263}
+  _playerScore: {fileID: 1715068263}
+  _playerControls: {fileID: 0}
 --- !u!114 &651971955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -615,6 +616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd5d76d68df16d4ab5e8a104a4a0a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HowToPlayPanel: {fileID: 0}
 --- !u!1 &662216875
 GameObject:
   m_ObjectHideFlags: 0
