@@ -1009,7 +1009,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Driving At Sunset
+  m_Text: 'Road racer
+
+'
 --- !u!222 &545671403
 CanvasRenderer:
   m_ObjectHideFlags: 0
